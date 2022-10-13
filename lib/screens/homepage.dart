@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kodo_app/widgets/item_tile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -35,7 +36,17 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      body: Container(color: Colors.green),
+      body: Container(
+        color: Colors.black,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ListView(
+            children: [
+              ItemTile(),
+            ],
+          ),
+        ),
+      ),
       bottomNavigationBar: Container(
         color: Colors.black,
         height: 75.0,
@@ -64,13 +75,15 @@ class _HomePageState extends State<HomePage> {
               width: width / 2,
               height: 75,
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.white, width: 1),
+                border: Border.all(color: Colors.white, width: 2),
               ),
               child: TextButton(
                 style: TextButton.styleFrom(
                   foregroundColor: Colors.white,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  print('width $width');
+                },
                 child: const Text(
                   '+',
                   style: TextStyle(
