@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kodo_app/screens/folderpage.dart';
 
 import 'screens/homepage.dart';
 
@@ -15,7 +16,10 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: SafeArea(child: HomePage()),
+      // home: SafeArea(child: HomePage()),
+      home: SafeArea(
+        child: FolderPage(),
+      ),
     );
   }
 }

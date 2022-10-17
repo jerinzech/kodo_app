@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:kodo_app/config/constants.dart';
 
-class AddTile extends StatelessWidget {
-  final controller;
+class FolderAdd extends StatelessWidget {
+  // final controller;
 
-  VoidCallback? onSave;
-  VoidCallback? onCancel;
+  // VoidCallback? onSave;
+  // VoidCallback? onCancel;
 
-  AddTile({
-    super.key,
-    required this.controller,
-    required this.onSave,
-    required this.onCancel,
-  });
+  // AddTile({
+  //   super.key,
+  //   required this.controller,
+  //   required this.onSave,
+  //   required this.onCancel,
+  // });
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,7 @@ class AddTile extends StatelessWidget {
                       color: Colors.grey[900],
                     ),
                     child: TextField(
-                        controller: controller,
+                        // controller: controller,
                         textAlignVertical: TextAlignVertical.top,
                         cursorColor: Colors.white,
                         style: montserratStyle.copyWith(
@@ -69,7 +69,7 @@ class AddTile extends StatelessWidget {
                               width: 0.5,
                             ),
                           ),
-                          labelText: 'title',
+                          labelText: 'folder name',
                           floatingLabelBehavior: FloatingLabelBehavior.always,
                           labelStyle: montserratStyle.copyWith(
                             fontSize: 20,
@@ -79,48 +79,6 @@ class AddTile extends StatelessWidget {
                   ),
                 ),
                 Spacer(),
-                Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Container(
-                    height: 200,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[900],
-                    ),
-                    child: TextField(
-                        textAlignVertical: TextAlignVertical.top,
-                        textAlign: TextAlign.justify,
-                        maxLines: null,
-                        minLines: null,
-                        expands: true,
-                        cursorColor: Colors.white,
-                        style: montserratStyle.copyWith(
-                          color: Colors.white,
-                          fontSize: 20,
-                        ),
-                        decoration: InputDecoration(
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(0),
-                            borderSide: BorderSide(
-                              color: Colors.white,
-                              width: 0.5,
-                            ),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(0),
-                            borderSide: BorderSide(
-                              color: Colors.white,
-                              width: 0.5,
-                            ),
-                          ),
-                          labelText: 'description',
-                          floatingLabelBehavior: FloatingLabelBehavior.always,
-                          labelStyle: montserratStyle.copyWith(
-                            fontSize: 20,
-                            color: Colors.white,
-                          ),
-                        )),
-                  ),
-                ),
                 Spacer(),
                 Row(
                   children: <Widget>[
@@ -134,7 +92,8 @@ class AddTile extends StatelessWidget {
                           style: TextButton.styleFrom(
                             foregroundColor: Colors.white,
                           ),
-                          onPressed: onCancel,
+                          onPressed: () {},
+                          // onPressed: onCancel,
                           child: Text(
                             'Cancel'.toUpperCase(),
                             style: const TextStyle(
@@ -154,7 +113,8 @@ class AddTile extends StatelessWidget {
                           style: TextButton.styleFrom(
                             foregroundColor: Colors.white,
                           ),
-                          onPressed: onSave,
+                          onPressed: () {},
+                          // onPressed: onSave,
                           child: Text(
                             'Save'.toUpperCase(),
                             style: const TextStyle(

@@ -1,56 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:kodo_app/config/constants.dart';
-import 'package:kodo_app/widgets/item_tile.dart';
-import 'package:kodo_app/widgets/itemadd.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+import '../config/constants.dart';
+import '../widgets/folderadd.dart';
+import '../widgets/foldertile.dart';
+
+class FolderPage extends StatefulWidget {
+  const FolderPage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<FolderPage> createState() => _FolderPageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  String userName = "Jerin";
+List toDoList = [
+  ["Make App", false],
+  ["Buy Vegetables", false]
+];
 
-  final _controllerText = TextEditingController();
-
-  //demo list
-  List toDoList = [
-    ["Make App", false],
-    ["Buy Vegetables", false]
-  ];
-
-  //checkbox toggle
-  void checkBoxChanged(bool? value, int index) {
-    setState(() {
-      toDoList[index][1] = !toDoList[index][1];
-    });
-  }
-
-  void saveNewTile() {
-    setState(() {
-      toDoList.add([_controllerText.text, false]);
-      Navigator.of(context).pop();
-    });
-  }
-
+class _FolderPageState extends State<FolderPage> {
   @override
   Widget build(BuildContext context) {
+    final userName = 'Jerin';
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    void createNewTile() {
+    void createNewFolder() {
       showModalBottomSheet(
           enableDrag: false,
           isScrollControlled: true,
           // isDismissible: false,
           context: context,
           builder: (context) {
-            return AddTile(
-              controller: _controllerText,
-              onSave: saveNewTile,
-              onCancel: () => Navigator.of(context).pop(),
-            );
+            return FolderAdd(
+                // controller: _controllerText,
+                // onSave: saveNewTile,
+                // onCancel: () => Navigator.of(context).pop(),
+                );
           });
     }
 
@@ -68,11 +51,11 @@ class _HomePageState extends State<HomePage> {
           child: ListView.builder(
             itemCount: toDoList.length,
             itemBuilder: (context, index) {
-              return ItemTile(
-                taskName: toDoList[index][0],
-                taskCompleted: toDoList[index][1],
-                onChanged: (value) => checkBoxChanged(value, index),
-              );
+              return FolderTile(
+                  // taskName: toDoList[index][0],
+                  // taskCompleted: toDoList[index][1],
+                  // onChanged: (value) => checkBoxChanged(value, index),
+                  );
             },
           ),
         ),
@@ -94,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 onPressed: () {},
                 child: Text(
-                  'Settings'.toUpperCase(),
+                  'Back'.toUpperCase(),
                   style: const TextStyle(
                     fontSize: 20,
                   ),
@@ -111,7 +94,8 @@ class _HomePageState extends State<HomePage> {
                 style: TextButton.styleFrom(
                   foregroundColor: Colors.white,
                 ),
-                onPressed: createNewTile,
+                onPressed: createNewFolder,
+                // onPressed: createNewTile,
                 child: const Text(
                   '+',
                   style: TextStyle(
