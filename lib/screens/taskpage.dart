@@ -1,46 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:kodo_app/config/constants.dart';
+import 'package:kodo_app/widgets/item_tile.dart';
+import 'package:kodo_app/widgets/itemadd.dart';
 
-import '../config/constants.dart';
-import '../widgets/folderadd.dart';
-import '../widgets/foldertile.dart';
-
-class FolderPage extends StatefulWidget {
-  const FolderPage({super.key});
+class FilePage extends StatefulWidget {
+  const FilePage({super.key});
 
   @override
-  State<FolderPage> createState() => _FolderPageState();
+  State<FilePage> createState() => _FilePageState();
 }
 
-List toDoList = [
-  ["Make App", false],
-  ["Buy Vegetables", false]
-];
+class _FilePageState extends State<FilePage> {
+  var toDoList = [];
 
-class _FolderPageState extends State<FolderPage> {
+  void createNewTile() {
+    showModalBottomSheet(
+        enableDrag: false,
+        isScrollControlled: true,
+        // isDismissible: false,
+        context: context,
+        builder: (context) {
+          return AddTile(
+            controller: _controllerText,
+            onSave: saveNewTile,
+            onCancel: () => Navigator.of(context).pop(),
+          );
+        });
+  }
+
+  //checkbox toggle
+  void checkBoxChanged(bool? value, int index) {
+    setState(() {
+      toDoList[index][1] = !toDoList[index][1];
+    });
+  }
+
+  void saveNewTile() {
+    setState(() {
+      toDoList.add([_controllerText.text, false]);
+      Navigator.of(context).pop();
+    });
+  }
+
+  final _controllerText = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    final userName = 'Jerin';
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    void createNewFolder() {
-      showModalBottomSheet(
-          enableDrag: false,
-          isScrollControlled: true,
-          // isDismissible: false,
-          context: context,
-          builder: (context) {
-            return FolderAdd(
-                // controller: _controllerText,
-                // onSave: saveNewTile,
-                // onCancel: () => Navigator.of(context).pop(),
-                );
-          });
-    }
-
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size(width, 75), // here the desired height
-        child: _CustomAppBar(userName: userName),
+        child: _CustomAppBar(),
       ),
       body: Container(
         height: 800,
@@ -51,11 +62,11 @@ class _FolderPageState extends State<FolderPage> {
           child: ListView.builder(
             itemCount: toDoList.length,
             itemBuilder: (context, index) {
-              return FolderTile(
-                  // taskName: toDoList[index][0],
-                  // taskCompleted: toDoList[index][1],
-                  // onChanged: (value) => checkBoxChanged(value, index),
-                  );
+              return ItemTile(
+                taskName: toDoList[index][0],
+                taskCompleted: toDoList[index][1],
+                onChanged: (value) => checkBoxChanged(value, index),
+              );
             },
           ),
         ),
@@ -94,9 +105,7 @@ class _FolderPageState extends State<FolderPage> {
                 style: TextButton.styleFrom(
                   foregroundColor: Colors.white,
                 ),
-                onPressed: createNewFolder,
-
-                // onPressed: createNewTile,
+                onPressed: createNewTile,
                 child: const Text(
                   '+',
                   style: TextStyle(
@@ -115,10 +124,7 @@ class _FolderPageState extends State<FolderPage> {
 class _CustomAppBar extends StatelessWidget {
   const _CustomAppBar({
     Key? key,
-    required this.userName,
   }) : super(key: key);
-
-  final String userName;
 
   @override
   Widget build(BuildContext context) {
@@ -130,7 +136,7 @@ class _CustomAppBar extends StatelessWidget {
       ),
       child: Center(
         child: Text(
-          "HEY $userName!".toUpperCase(),
+          "HEY foldername!".toUpperCase(),
           style: montserratStyle.copyWith(
             color: Colors.white,
             fontSize: 20,

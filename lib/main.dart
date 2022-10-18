@@ -15,10 +15,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'KODO',
       // home: SafeArea(child: HomePage()),
       home: SafeArea(
-        child: FolderPage(),
+        child: HomePage(),
       ),
     );
   }
