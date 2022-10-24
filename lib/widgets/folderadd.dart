@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:kodo_app/config/constants.dart';
+import 'package:kodo_app/config/database.dart';
+import 'package:kodo_app/screens/folderpage.dart';
 
-class FolderAdd extends StatelessWidget {
-  // final controller;
+class FolderAdd extends StatefulWidget {
+  // final controllerF;
+  FolderAdd({
+    super.key,
+    // required this.controllerF,
+  });
 
-  // VoidCallback? onSave;
-  // VoidCallback? onCancel;
+  @override
+  State<FolderAdd> createState() => _FolderAddState();
+}
 
-  // AddTile({
-  //   super.key,
-  //   required this.controller,
-  //   required this.onSave,
-  //   required this.onCancel,
-  // });
+List todolist = [];
 
+class _FolderAddState extends State<FolderAdd> {
   List folderColorList = [
     AppColors.liteGreen,
     AppColors.textBlack,
@@ -26,23 +29,41 @@ class FolderAdd extends StatelessWidget {
     AppColors.sageGrey
   ];
 
+  // List folderFontList = [
+  //   righteousStyle.copyWith(
+  //       fontSize: 20, fontWeight: FontWeight.normal, color: Colors.white),
+  //   robotoMonoStyle.copyWith(
+  //       fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+  //   concertOneStyle.copyWith(
+  //       fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+  //   kanitStyle.copyWith(
+  //       fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+  //   yesevaOneStyle.copyWith(
+  //       fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+  //   dmSansStyle.copyWith(
+  //       fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+  //   playfairDisplayStyle.copyWith(
+  //       fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white)
+  // ];
+
   List folderFontList = [
-    righteousStyle.copyWith(
-        fontSize: 20, fontWeight: FontWeight.normal, color: Colors.white),
-    robotoMonoStyle.copyWith(
-        fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-    concertOneStyle.copyWith(
-        fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-    kanitStyle.copyWith(
-        fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-    yesevaOneStyle.copyWith(
-        fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-    dmSansStyle.copyWith(
-        fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-    playfairDisplayStyle.copyWith(
-        fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white)
+    righteousStyle,
+    robotoMonoStyle,
+    concertOneStyle,
+    kanitStyle,
+    yesevaOneStyle,
+    dmSansStyle,
+    playfairDisplayStyle,
   ];
 
+  var selectedC;
+  var selectedF;
+  var selectedFont;
+  var selectedColor;
+
+  get controllerF => null;
+
+  // Function selectFont() {
   @override
   Widget build(BuildContext context) {
     final mediaPadding = MediaQuery.of(context);
@@ -77,7 +98,7 @@ class FolderAdd extends StatelessWidget {
                       color: Colors.grey[900],
                     ),
                     child: TextField(
-                        // controller: controller,
+                        // controller: controllerF,
                         textAlignVertical: TextAlignVertical.top,
                         cursorColor: Colors.white,
                         style: montserratStyle.copyWith(
@@ -146,8 +167,26 @@ class FolderAdd extends StatelessWidget {
                                       width: 25,
                                       padding: const EdgeInsets.all(5.0),
                                       child: TextButton(
+                                        style: ButtonStyle(
+                                          side: MaterialStateBorderSide
+                                              .resolveWith(
+                                                  (Set<MaterialState> states) {
+                                            if (selectedC == index) {
+                                              return const BorderSide(
+                                                  color: Colors.white);
+                                            }
+                                            return null; // Defer to default value on the theme or widget.
+                                          }),
+                                        ),
                                         autofocus: true,
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          setState(() {
+                                            selectedC = index;
+                                            selectedColor =
+                                                folderColorList[index];
+                                          });
+                                          print(selectedColor);
+                                        },
                                         child: Container(
                                           height: 35,
                                           width: 35,
@@ -166,49 +205,68 @@ class FolderAdd extends StatelessWidget {
                   child: SizedBox(
                     height: 120,
                     child: Container(
-                        color: Colors.grey[900],
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.only(left: 10, top: 2),
-                              height: 20,
-                              child: Text(
-                                "folder font",
-                                textAlign: TextAlign.left,
-                                style: montserratStyle.copyWith(
-                                  fontSize: 15,
-                                  color: Colors.white,
-                                ),
+                      color: Colors.grey[900],
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.only(left: 10, top: 2),
+                            height: 20,
+                            child: Text(
+                              "folder font",
+                              textAlign: TextAlign.left,
+                              style: montserratStyle.copyWith(
+                                fontSize: 15,
+                                color: Colors.white,
                               ),
                             ),
-                            Container(
-                              height: 100,
-                              child: GridView.builder(
-                                  // physics: NeverScrollableScrollPhysics(),
-                                  itemCount: 6,
-                                  gridDelegate:
-                                      SliverGridDelegateWithFixedCrossAxisCount(
-                                    mainAxisExtent: 50.0,
-                                    crossAxisCount: 3,
-                                  ),
-                                  itemBuilder: (context, index) {
-                                    return Container(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: TextButton(
-                                        autofocus: true,
-                                        onPressed: () {},
-                                        child: Text(
-                                          'Hello',
-                                          style: folderFontList[index],
-                                        ),
+                          ),
+                          Container(
+                            height: 100,
+                            child: GridView.builder(
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: 6,
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                  mainAxisExtent: 50.0,
+                                  crossAxisCount: 3,
+                                ),
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: OutlinedButton(
+                                      style: ButtonStyle(
+                                        side:
+                                            MaterialStateBorderSide.resolveWith(
+                                                (Set<MaterialState> states) {
+                                          if (selectedF == index) {
+                                            return const BorderSide(
+                                                color: Colors.white);
+                                          }
+                                          return null; // Defer to default value on the theme or widget.
+                                        }),
                                       ),
-                                    );
-                                  }),
-                            ),
-                          ],
-                        )),
+                                      autofocus: true,
+                                      onPressed: () {
+                                        setState(() {
+                                          selectedF = index;
+                                          selectedFont = folderFontList[index];
+                                        });
+                                        print(folderFontList[index]);
+                                        print(selectedFont);
+                                      },
+                                      child: Text(
+                                        'Hello',
+                                        style: folderFontList[index],
+                                      ),
+                                    ),
+                                  );
+                                }),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
                 Row(
@@ -223,7 +281,9 @@ class FolderAdd extends StatelessWidget {
                           style: TextButton.styleFrom(
                             foregroundColor: Colors.white,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
                           // onPressed: onCancel,
                           child: Text(
                             'Cancel'.toUpperCase(),
@@ -245,6 +305,8 @@ class FolderAdd extends StatelessWidget {
                             foregroundColor: Colors.white,
                           ),
                           onPressed: () {},
+                          // saveFolder(
+                          //     controllerF.text, selectedColor, selectedFont),
                           // onPressed: onSave,
                           child: Text(
                             'Save'.toUpperCase(),
@@ -264,8 +326,9 @@ class FolderAdd extends StatelessWidget {
       ),
     );
   }
-}
 
+  saveFolder(text, selectedColor, selectedFont) {}
+}
 
 
 

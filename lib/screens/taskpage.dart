@@ -88,7 +88,7 @@ class _FilePageState extends State<FilePage> {
                 ),
                 onPressed: () {},
                 child: Text(
-                  'Settings'.toUpperCase(),
+                  'Back'.toUpperCase(),
                   style: const TextStyle(
                     fontSize: 20,
                   ),

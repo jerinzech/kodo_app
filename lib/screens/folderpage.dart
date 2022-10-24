@@ -12,9 +12,17 @@ class FolderPage extends StatefulWidget {
 }
 
 List toDoList = [
-  ["Make App", false],
-  ["Buy Vegetables", false]
+  [
+    ['folder1', AppColors.cream, righteousStyle],
+    ["Make App", false]
+  ],
+  [
+    ['folder2', AppColors.orange, concertOneStyle],
+    ["Buy Vegetables", false]
+  ]
 ];
+
+final _controllerText = TextEditingController();
 
 class _FolderPageState extends State<FolderPage> {
   @override
@@ -30,6 +38,7 @@ class _FolderPageState extends State<FolderPage> {
           context: context,
           builder: (context) {
             return FolderAdd(
+                // controllerF: _controllerText,
                 // controller: _controllerText,
                 // onSave: saveNewTile,
                 // onCancel: () => Navigator.of(context).pop(),
@@ -52,10 +61,10 @@ class _FolderPageState extends State<FolderPage> {
             itemCount: toDoList.length,
             itemBuilder: (context, index) {
               return FolderTile(
-                  // taskName: toDoList[index][0],
-                  // taskCompleted: toDoList[index][1],
-                  // onChanged: (value) => checkBoxChanged(value, index),
-                  );
+                folderName: 'folder name',
+                folderColor: AppColors.cream,
+                folderFont: concertOneStyle,
+              );
             },
           ),
         ),
