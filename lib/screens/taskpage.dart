@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:kodo_app/config/constants.dart';
+import 'package:kodo_app/screens/folderpage.dart';
 import 'package:kodo_app/widgets/item_tile.dart';
 import 'package:kodo_app/widgets/itemadd.dart';
 
 class FilePage extends StatefulWidget {
-  const FilePage({super.key});
+  final int folderIndex;
+  const FilePage({
+    super.key,
+    required this.folderIndex,
+  });
 
   @override
   State<FilePage> createState() => _FilePageState();
@@ -12,6 +17,8 @@ class FilePage extends StatefulWidget {
 
 class _FilePageState extends State<FilePage> {
   var toDoList = [];
+
+  var folderIndex;
 
   void createNewTile() {
     showModalBottomSheet(
@@ -31,7 +38,7 @@ class _FilePageState extends State<FilePage> {
   //checkbox toggle
   void checkBoxChanged(bool? value, int index) {
     setState(() {
-      toDoList[index][1] = !toDoList[index][1];
+      toDoList[folderIndex][[index][1]] = !toDoList[folderIndex][[index][1]];
     });
   }
 
@@ -128,6 +135,8 @@ class _CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String title = 'folder';
+
     return Container(
       height: 75.0,
       decoration: BoxDecoration(
@@ -136,7 +145,7 @@ class _CustomAppBar extends StatelessWidget {
       ),
       child: Center(
         child: Text(
-          "HEY foldername!".toUpperCase(),
+          "HEY $title!".toUpperCase(),
           style: montserratStyle.copyWith(
             color: Colors.white,
             fontSize: 20,

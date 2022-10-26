@@ -19,7 +19,7 @@ List todolist = [];
 class _FolderAddState extends State<FolderAdd> {
   List folderColorList = [
     AppColors.liteGreen,
-    AppColors.textBlack,
+    AppColors.litebrown,
     AppColors.cream,
     AppColors.liteOrange,
     AppColors.orange,
@@ -49,11 +49,11 @@ class _FolderAddState extends State<FolderAdd> {
   List folderFontList = [
     righteousStyle,
     robotoMonoStyle,
-    concertOneStyle,
     kanitStyle,
     yesevaOneStyle,
     dmSansStyle,
     playfairDisplayStyle,
+    sourceCodeProStyle
   ];
 
   var selectedC;
@@ -234,15 +234,29 @@ class _FolderAddState extends State<FolderAdd> {
                                 ),
                                 itemBuilder: (context, index) {
                                   return Container(
+                                    // color: Colors.white,
                                     padding: const EdgeInsets.all(5.0),
                                     child: OutlinedButton(
                                       style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.resolveWith(
+                                                (states) {
+                                          // If the button is pressed, return green, otherwise blue
+                                          if (states.contains(
+                                              MaterialState.pressed)) {
+                                            return Colors.white;
+                                          }
+                                          return Colors.white;
+                                        }),
                                         side:
                                             MaterialStateBorderSide.resolveWith(
                                                 (Set<MaterialState> states) {
                                           if (selectedF == index) {
                                             return const BorderSide(
-                                                color: Colors.white);
+                                                strokeAlign:
+                                                    StrokeAlign.outside,
+                                                width: 2,
+                                                color: Colors.red);
                                           }
                                           return null; // Defer to default value on the theme or widget.
                                         }),
