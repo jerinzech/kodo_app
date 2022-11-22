@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:kodo_app/screens/taskpage.dart';
+
+import '../config/database.dart';
 
 class FolderTile extends StatelessWidget {
   final String folderName;
   final Color folderColor;
   final TextStyle folderFont;
   final int folderIndex;
+  final _myBox = Hive.box('mybox');
+  ToDoDataBase db = ToDoDataBase();
 
-  const FolderTile({
+  FolderTile({
     super.key,
     required this.folderName,
     required this.folderColor,

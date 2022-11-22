@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:kodo_app/screens/folderpage.dart';
 
 import 'screens/homepage.dart';
 
-void main() {
+void main() async {
+  // initialise hive instance
+  await Hive.initFlutter();
+
+  //open a box
+  var box = await Hive.openBox('mybox');
+  // var appBox = await Hive.openBox('userSettings');
+
   runApp(const MyApp());
 }
 

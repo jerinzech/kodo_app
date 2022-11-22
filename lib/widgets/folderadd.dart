@@ -17,18 +17,7 @@ class FolderAdd extends StatefulWidget {
 List todolist = [];
 
 class _FolderAddState extends State<FolderAdd> {
-  List folderColorList = [
-    AppColors.liteGreen,
-    AppColors.litebrown,
-    AppColors.cream,
-    AppColors.liteOrange,
-    AppColors.orange,
-    AppColors.liteBlue,
-    AppColors.purple,
-    AppColors.sageBlue,
-    AppColors.sageGrey
-  ];
-
+  // final folderTileColor = folderFontList;
   // List folderFontList = [
   //   righteousStyle.copyWith(
   //       fontSize: 20, fontWeight: FontWeight.normal, color: Colors.white),
@@ -46,15 +35,15 @@ class _FolderAddState extends State<FolderAdd> {
   //       fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white)
   // ];
 
-  List folderFontList = [
-    righteousStyle,
-    robotoMonoStyle,
-    kanitStyle,
-    yesevaOneStyle,
-    dmSansStyle,
-    playfairDisplayStyle,
-    sourceCodeProStyle
-  ];
+  // List folderFontList = [
+  //   righteousStyle,
+  //   robotoMonoStyle,
+  //   kanitStyle,
+  //   yesevaOneStyle,
+  //   dmSansStyle,
+  //   playfairDisplayStyle,
+  //   sourceCodeProStyle
+  // ];
 
   var selectedC;
   var selectedF;
@@ -182,15 +171,15 @@ class _FolderAddState extends State<FolderAdd> {
                                         onPressed: () {
                                           setState(() {
                                             selectedC = index;
-                                            selectedColor =
-                                                folderColorList[index];
+                                            // selectedColor =
+                                            //     folderColorList[index];
                                           });
                                           print(selectedColor);
                                         },
                                         child: Container(
                                           height: 35,
                                           width: 35,
-                                          color: folderColorList[index],
+                                          // color: folderColorList[index],
                                         ),
                                       ),
                                     );
@@ -265,14 +254,14 @@ class _FolderAddState extends State<FolderAdd> {
                                       onPressed: () {
                                         setState(() {
                                           selectedF = index;
-                                          selectedFont = folderFontList[index];
+                                          // selectedFont = folderFontList[index];
                                         });
-                                        print(folderFontList[index]);
+                                        // print(folderFontList[index]);
                                         print(selectedFont);
                                       },
                                       child: Text(
                                         'Hello',
-                                        style: folderFontList[index],
+                                        // style: folderFontList[index],
                                       ),
                                     ),
                                   );
